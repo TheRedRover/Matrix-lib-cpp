@@ -5,7 +5,7 @@
 template <int N, int M, typename T>
 struct Matrix
 {
-    static_assert(std::is_integral<T, "incorrect type for matrix declaration");
+    static_assert(std::is_integral<T>::value, "incorrect type for matrix declaration");
     using matrix = std::array<T, M*N>;
 
     private: matrix matrix_;
