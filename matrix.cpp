@@ -2,12 +2,10 @@
 #include <iostream>
 #include <type_traits>
 
-template <int N, int M, typename T, typename Enable = void>
-struct Matrix;
-
 template <int N, int M, typename T>
-struct Matrix<N,M, T, typename std::enable_if<std::is_integral<T>::value>::type>
+struct Matrix
 {
+    static_assert(std::is_integral<T, "incorrect type for matrix declaration");
     using matrix = std::array<T, M*N>;
 
     private: matrix matrix_;
