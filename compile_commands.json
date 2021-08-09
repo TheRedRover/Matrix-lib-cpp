@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-O2",
+      "-I./include",
+      "-o",
+      "./build/test.o",
+      "test/test.cc"
+    ],
+    "directory": "/home/skqf/dev/libpdmatrix",
+    "file": "/home/skqf/dev/libpdmatrix/test/test.cc",
+    "output": "/home/skqf/dev/libpdmatrix/./build/test.o"
+  }
+]
