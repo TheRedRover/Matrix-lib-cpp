@@ -14,5 +14,11 @@ int main() {
   matrix += m2;
   std::cout << (matrix(1, 2) == 12) << "\n";
 
-  std::cout << matrix;
+    matrix+=m2;
+    std::cout<<(matrix(1,2)==12)<<"\n";
+
+    Matrix<double> m = Matrix<double>(matrix);
+    matrix+=matrix;
+    std::cout<<m;
+    std::cout<<matrix;
 }
