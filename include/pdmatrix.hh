@@ -26,7 +26,7 @@ private:
 public:
     Matrix<T>(std::initializer_list<T> l, size_t rows, size_t cols): matrix_(l), rows_(rows), cols_(cols){};
 
-    Matrix<T>(Matrix<T>& m):matrix_(m.matrix_), rows_(m.rows()),cols_(m.cols()){};
+    Matrix<T>(const Matrix<T>& m):matrix_(m.matrix_), rows_(m.rows()),cols_(m.cols()){};
 
     auto cols() const -> size_t { return cols_ ;}
 
