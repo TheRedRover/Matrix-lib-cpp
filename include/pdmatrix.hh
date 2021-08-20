@@ -15,7 +15,7 @@
 
 template <typename T>
 struct Matrix {
-    static_assert(std::is_arithmetic<T>::value, "Integral type required");
+    static_assert(std::is_arithmetic<T>::value, "Arithmetic type is required");
     using matrix = std::vector<T>;
 
 private:
