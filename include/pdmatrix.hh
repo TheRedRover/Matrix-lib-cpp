@@ -28,11 +28,9 @@ public:
   Matrix<T>(const Matrix<T> &m)
       : matrix_(m.matrix_), rows_(m.rows()), cols_(m.cols()){};
 
-  Matrix<T>(size_t rows, size_t cols): rows_(rows), cols_(cols)
-    {
-        matrix_ = std::vector<T>(rows_*cols_, 0.0);
-    }
-
+  Matrix<T>(size_t rows, size_t cols) : rows_(rows), cols_(cols) {
+    matrix_ = std::vector<T>(rows_ * cols_, 0.0);
+  }
 
   auto cols() const -> size_t { return cols_; }
 
@@ -49,7 +47,7 @@ public:
          ++i, ++j) {
       *i = *i + *j;
     }
-    return * this;
+    return *this;
   }
 
   auto operator-=(const Matrix<T> &m) -> Matrix<T> & {
@@ -59,26 +57,23 @@ public:
          ++i, ++j) {
       *i = *i - *j;
     }
-    return * this;
+    return *this;
   }
 
-  Matrix<T> operator+(Matrix<T> & m) const
-  {
+  Matrix<T> operator+(Matrix<T> &m) const {
     Matrix<T> res = Matrix<T>(rows(), cols());
     if (!(this->rows() == m.rows() && this->cols() == m.cols()))
       throw std::invalid_argument("matrices have different size");
-    auto N = rows()*cols(); 
+    auto N = rows() * cols();
     const auto alignedN = N - N % 8;
-      for (auto i = 0; i < alignedN; i+=8) {
-          _mm_storeu_pd(&res.matrix_[i], 
-                  _mm_add_pd(_mm_loadu_pd(&matrix_[i]), 
-                  _mm_loadu_pd(&m.matrix_[i])));
-      }
-      for (auto i = alignedN; i < N; ++i) {
-          res.matrix_[i] = matrix_[i] + m.matrix_[i];
-      }
-      return res;
-    
+    for (auto i = 0; i < alignedN; i += 8) {
+      _mm_storeu_pd(&res.matrix_[i], _mm_add_pd(_mm_loadu_pd(&matrix_[i]),
+                                                _mm_loadu_pd(&m.matrix_[i])));
+    }
+    for (auto i = alignedN; i < N; ++i) {
+      res.matrix_[i] = matrix_[i] + m.matrix_[i];
+    }
+    return res;
   }
 };
 
