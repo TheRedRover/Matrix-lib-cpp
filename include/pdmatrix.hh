@@ -40,7 +40,7 @@ public:
     auto operator+=(const Matrix<T>& m) -> Matrix<T> *
     {
         if(!(this->rows()==m.rows() && this->cols()==m.cols()))
-            throw "matrices have different size";
+            throw std::invalid_argument("matrices have different size");
         for(auto i=matrix_.begin(), j=m.matrix_.begin(); i!=matrix_.end();i++,j++)
         {
             *i = *i+*j;
@@ -51,7 +51,7 @@ public:
     auto operator-=(const Matrix<T>& m) -> Matrix<T> *
     {
         if(!(this->rows()==m.rows() && this->cols()==m.cols()))
-            throw "matrices have different size";
+            throw std::invalid_argument("matrices have different size");
         for(auto i=matrix_.begin(), j=m.matrix_.begin(); i!=matrix_.end();i++,j++)
         {
             *i = *i-*j;
