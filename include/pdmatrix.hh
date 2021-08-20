@@ -1,17 +1,21 @@
 #pragma once
-#include <cstddef>
-#include <initializer_list>
+
 #ifndef LIBPDMATRIX_PDMATRIX_
 #define LIBPDMATRIX_PDMATRIX_
 
 #include <vector>
 #include <type_traits>
+#include <cstddef>
+#include <initializer_list>
+#include <iostream>
+#include <ostream>
+#include <iomanip>
 
 
 
 template <typename T>
 struct Matrix {
-    static_assert(std::is_integral<T>::value, "Integral type required");
+    static_assert(std::is_arithmetic<T>::value, "Arithmetic type is required");
     using matrix = std::vector<T>;
 
 private:
@@ -30,9 +34,31 @@ public:
     {
         return matrix_[i*cols()+j];
     };
+
+    auto operator+=(const Matrix<T>& m) -> Matrix<T> *
+    {
+        if(!(this->rows()==m.rows() && this->cols()==m.cols()))
+            throw "matrices have different size";
+        for(auto i=matrix_.begin(), j=m.matrix_.begin(); i!=matrix_.end();i++,j++)
+        {
+            *i = *i+*j;
+        }
+        return this;
+    }
 };
 
-// template <typename T>
-// auto Matrix<T>::cols() const -> 
+template<typename T>
+auto operator<<(std::ostream& os, Matrix<T>& m) -> std::ostream&
+{
+    for(auto i = 0; i<m.rows(); i++)
+    {
+        for(auto j=0; j<m.cols(); j++)
+        {
+            os<<std::setprecision(6)<<m(i,j)<<"\t";
+        }
+        os<<"\n\n";
+    }
+    return os;
+}
 
 #endif // LIBPDMATRIX_PDMATRIX_
