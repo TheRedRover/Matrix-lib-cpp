@@ -42,7 +42,7 @@ public:
          ++i, ++j) {
       *i = *i + *j;
     }
-    return this;
+    return * this;
   }
 
   auto operator-=(const Matrix<T> &m) -> Matrix<T> & {
@@ -52,7 +52,7 @@ public:
          ++i, ++j) {
       *i = *i - *j;
     }
-    return this;
+    return * this;
   }
 };
 
