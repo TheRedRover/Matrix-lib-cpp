@@ -1,8 +1,4 @@
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: push
 name: clang-format Code Formatter
 jobs:
   lint:
@@ -10,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Clang Code Formatter
-      uses: ivanludvig/clang-format-action@v1.4
+      uses: sskcvqikf/clang-format-action@v1.4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
