@@ -26,6 +26,8 @@ private:
 public:
     Matrix<T>(std::initializer_list<T> l, size_t rows, size_t cols): matrix_(l), rows_(rows), cols_(cols){};
 
+    Matrix<T>(Matrix<T>& m):matrix_(m.matrix_), rows_(m.rows()),cols_(m.cols()){};
+
     auto cols() const -> size_t { return cols_ ;}
 
     auto rows() const -> size_t { return rows_;}
@@ -42,6 +44,17 @@ public:
         for(auto i=matrix_.begin(), j=m.matrix_.begin(); i!=matrix_.end();i++,j++)
         {
             *i = *i+*j;
+        }
+        return this;
+    }
+
+    auto operator-=(const Matrix<T>& m) -> Matrix<T> *
+    {
+        if(!(this->rows()==m.rows() && this->cols()==m.cols()))
+            throw "matrices have different size";
+        for(auto i=matrix_.begin(), j=m.matrix_.begin(); i!=matrix_.end();i++,j++)
+        {
+            *i = *i-*j;
         }
         return this;
     }
